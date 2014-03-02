@@ -60,7 +60,7 @@ public class MusicDataUpdaterServiceImpl implements MusicDataUpdaterService{
 		persistenceManager.beginTransaction();
 	
 		for( MusicData data : datas ){
-			logger.debug("update : " + datas);
+			logger.info("update : " + datas);
 			if(!isDataComplete(data)){
 				persistenceManager.rollbackTransaction();
 				persistenceManager.closeSession();
