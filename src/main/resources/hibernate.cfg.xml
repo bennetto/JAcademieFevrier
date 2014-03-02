@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration
+    PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+  <session-factory>
+	
+		<!--jdbc:hsqldb:hsql://localhost/bankonetdb-->
+    	 
+				
+		<property name="hibernate.connection.url">jdbc:hsqldb:hsql://localhost/musicdb</property> 
+		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        	
+		<property name="hibernate.connection.username">SA</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+ 			
+		<!-- Configuration hibernate -->
+       	<property name="show_sql">true</property>
+       	<property name="hibernate.hbm2ddl.auto">create</property>
+       	
+						
+		<!-- Liste des fichiers de Mapping hbm -->
+		
+		<mapping resource="org/jacademie/examenFevrier/dao/impl/mapping/Artiste.hbm.xml"/>
+		<mapping resource="org/jacademie/examenFevrier/dao/impl/mapping/Album.hbm.xml"/>		
+		<mapping resource="org/jacademie/examenFevrier/dao/impl/mapping/Chanson.hbm.xml"/>
+		
+		
+	</session-factory>
+  </hibernate-configuration>

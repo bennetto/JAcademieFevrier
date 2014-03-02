@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.jacademie.examenFevrier.bo">
+
+	<class name="Chanson" table="Chanson">
+
+		<id name="idChanson" type="integer">
+			<generator class="native" />
+		</id>
+		
+		<property name="numero"  type="integer" >
+			<column name="NUMERO" not-null="true" />
+		</property>
+			
+
+		<property name="titre" type="string">
+			<column name="TITRE" not-null="true" />
+		</property>
+
+		<property name="duree" type="integer">
+			<column name="DUREE" not-null="true" />
+		</property>
+
+	</class>
+	<query name="getChansonByID">
+		SELECT ch FROM Album as alb
+		JOIN alb.chansons as ch
+		WHERE  alb.codeAlbum=:album_code 
+		AND ch.numero=:chanson_numero
+	</query>
+</hibernate-mapping>	

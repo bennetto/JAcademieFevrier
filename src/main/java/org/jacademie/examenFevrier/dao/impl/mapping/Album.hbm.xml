@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.jacademie.examenFevrier.bo">
+
+	<class name="Album" table="Album" >
+	
+		<id name="codeAlbum" type="integer"/>
+		
+		<property name="nom" type="string">
+			<column name="NOM" not-null="true" />
+		</property>
+		
+		
+		<set name="chansons" lazy="false"   cascade="all,delete-orphan" >
+			<key column="ALBUM_ID" not-null="true"/>
+			<one-to-many class="Chanson"/>
+		</set>
+
+	</class>
+
+</hibernate-mapping>	
