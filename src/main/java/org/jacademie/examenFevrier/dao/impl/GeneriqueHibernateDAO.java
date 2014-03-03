@@ -60,8 +60,10 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 	@Override
 	public List<T> getAll() {
 		Session hibernateSession = getSession();
+		hibernateSession.beginTransaction();
 		List<T> list = null;
         Query query = hibernateSession.createQuery("from " + clazz.getName());
+        hibernateSession.close();
         list = query.list();
         return list;
 	}
