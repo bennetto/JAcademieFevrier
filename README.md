@@ -27,7 +27,7 @@ L’objectif est de réaliser une application Web Java permettant de visualiser 
 L’application web doit permettre sur une 1ère page de lister les Artistes.
 En cliquant sur un Artiste on arrive sur la page de cette artiste qui liste ses albums.
 En cliquant sur album on arrive sur la page de cet album qui liste les chansons de cet album.
-
+On peut supprimer et ajouter chacun des élements susmentionnés via ces pages.
 
 Installation (Eclipse)
 ----------------------
@@ -95,7 +95,29 @@ Si vous utilisez une base de donnée HSQLDB, vous n'avez qu'a personnaliser les 
 Si vous utilisez un autre type de base de données, changez le dialecte, et importez votre propre librairie dans le pom.xml (utilisateur avancés)
 
 
+Navigation
+-----------------------------
+### Pages d'acces :
+* Lancement de la mise a jour a partir des fichiers CSV (Examen précedent)
 
+http://localhost:8080/JAcademieFevrier/musicExtractor.do
+Lance l'execution du script mis en place lors de l'examen précedent
+
+* Affichage de la liste des artistes.
+
+http://localhost:8080/JAcademieFevrier/artistes.do
+Affichage de la liste des artistes contenus dans la base de données. Le bouton delete permet la suppression de l'artiste associé. Le formulaire en bas de page permet la création d'un nouvel artiste.
+
+### Pages de navigation :
+* Affichage de la liste des albums d'un artistes.
+
+http://localhost:8080/JAcademieFevrier/albums.do?artiste=(code_artiste)
+Affichage de la liste des albums d'un artiste. Le bouton delete permet la suppression de l'album associé. Le formulaire en bas de page permet l'ajout d'un nouvel album pour cet artiste.
+
+* Affichage de la liste des albums d'un artistes.
+
+http://localhost:8080/JAcademieFevrier/chansons.do?album=(code_album)
+Affichage de la liste des chansons d'un album. Le bouton delete permet la suppression de la chanson associée. Le formulaire en bas de page permet l'ajout d'une nouvelle chanson pour cet album.
 
 
 Choix de la technologie
