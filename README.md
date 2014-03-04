@@ -135,9 +135,7 @@ La mise à jour à partir de fichier ".music" fait appel a deux services interfa
 Un dernier service permettera le déplacement du fichier traité dans un dossier indiqué en paramètre.
 
 ### Dépendance dans la projet
- Dans le projet toutes les classes ( en dehors des classes métiers) sont interfacées. Cela permet de limiter les dépendance entre les classes et permet de changer de technologie aisément (Par exemple si une nouvelle implémentation d'un service souhaite être faite, il suffira d’implémenter la bonne interface et de ne faire que quelques changement dans les classes qui les utilises. ).
- 
-Spring gère la gestion du cycle de vie des differents services, DAOs et objets mis en oeuvre lors d'une requete
+Spring gère la gestion du cycle de vie des differents services, DAOs et objets mis en oeuvre lors d'une requete. La gestion par annotation combine la simplicité et la décorélation des objets injectés.
 
 
 Modèle physique des données
