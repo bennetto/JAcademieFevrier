@@ -94,7 +94,7 @@ Placez vous dans la classe Main.java, et appuyer sur le bouton Run (Fleche verte
 
 
 
-TODO
+TODO : Comment lancer le server et l'application
 
 
 
@@ -115,7 +115,7 @@ Cette librairie permet de lire des fichiers csv.
 Ce framework permet de réaliser des test unitaire sur le projet. Il permet de tester de façon automatique des fonctions de classes importantes afin de vérifier après modification que tous marche correctement
 
 ### spring MVC
-TODO
+TODO ; spring MVC
 
 
 Structure du projet
@@ -125,7 +125,7 @@ Structure du projet
 * **Couche d’accès au donnée** (DAO) : Cette couche contient toutes les fonctions pour communiquer avec le base de donnée ( dans ce projet via hibernate). 
 * **Couche métier** (BO) : Cette couche contient les classes qui permettes de stocker les donnée métier.  Ce ne sont que des données brutes, et il n'y a aucune (ou très peu) d'intelligence.
 
-TODO
+TODO : add couche controller et page
 
 
 ### Main
@@ -162,7 +162,7 @@ Modèle physique des données
 Descriptif des packages
 -----------------------
 
-TODO
+TODO : add package controller
 
 
 ### org.jacademie.examenDecembre.bo (Buiseness object)
@@ -204,12 +204,12 @@ Classes de test des Services et DAO de l'application.
 * **hibernate.cfg.xml :** Configuration de la base de données et du mapping Hibernate
 * **log4j.properties :** Configuration de la journalisation.
 
-TODO
+TODO : ressource spring et ...
 
 Librairies utilisées
 --------------------
 
-TODO
+TODO 
 
 * **log4j :** Pour la journalisation.
 * **org.hsqldb :** Gestion de base de données.
