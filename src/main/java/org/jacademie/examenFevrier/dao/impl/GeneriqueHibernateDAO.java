@@ -51,14 +51,14 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 	@Override
 	public T getById(Serializable id) {
 		Session hibernateSession = getSession();
-		hibernateSession.beginTransaction();
+		//hibernateSession.beginTransaction();
 		T t = null;
 		try{
 			t = (T) hibernateSession.get(clazz, id);
-			 hibernateSession.close();
+			// hibernateSession.close();
 			return t;
 		}catch(RuntimeException ex){
-			 hibernateSession.close();
+			// hibernateSession.close();
 			logger.error("GenericHibernateDAO<"+clazz.getSimpleName()+">.getById unexpected error.", ex );//,ex
 			throw ex;
 		}
@@ -70,11 +70,11 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 	@Override
 	public List<T> getAll() {
 		Session hibernateSession = getSession();
-		hibernateSession.beginTransaction();
+		//hibernateSession.beginTransaction();
 		List<T> list = null;
         Query query = hibernateSession.createQuery("from " + clazz.getName());
         list = query.list();
-        hibernateSession.close();
+       // hibernateSession.close();
        
         return list;
 	}

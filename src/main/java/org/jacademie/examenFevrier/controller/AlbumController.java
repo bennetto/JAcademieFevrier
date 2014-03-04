@@ -2,6 +2,8 @@ package org.jacademie.examenFevrier.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.jacademie.examenFevrier.bo.Album;
 import org.jacademie.examenFevrier.bo.Artiste;
@@ -34,13 +36,16 @@ public class AlbumController {
 	@ModelAttribute("albums") 
 	public List<Album> getAlbumsList(){
 		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
 		List<Album> albums = albumService.getAll();
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return albums;
 	}
 	
 	public List<Album> getAlbumsList(int idArtiste){
 		persistenceManager.openSession();
+		
 		List<Album> albums = albumService.getByArtistId(idArtiste);
 		persistenceManager.closeSession();
 		return albums;
@@ -48,7 +53,9 @@ public class AlbumController {
 	
 	public Artiste getArtiste(int idArtiste){
 		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
 		Artiste artiste = artisteService.getById(idArtiste);
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return artiste;
 	}
@@ -70,12 +77,37 @@ public class AlbumController {
 		
 	}
 	
+	@RequestMapping(value="/delete_album", method= RequestMethod.GET)
+	public String deleteArtiste(@RequestParam("album") int idAlbum,@RequestParam("artiste") int idArtiste,HttpServletRequest request){
 
-	@RequestMapping(value="/create-album", method= RequestMethod.POST)
-	public ModelAndView createAlbum(@ModelAttribute(value="album") Album album, @ModelAttribute(value="albums") List<Album> albums){
-		albumService.save(album);
-		return new ModelAndView("list-album", "albums",albums);
+
+		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
+		Album album = albumService.getById(idAlbum);
+		albumService.delete(album);
+		persistenceManager.commitTransaction();
+		persistenceManager.closeSession();
 		
+		String redirectUrl = "/albums.do?artiste="+idArtiste;
+	    return "redirect:" + redirectUrl;
 		
 	}
+	
+	@RequestMapping(value="/addAlbum", method= RequestMethod.POST)
+	public String createArtiste(@ModelAttribute(value="album") Album album,@RequestParam("artiste") int idArtiste){
+		
+		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
+		Artiste artiste = artisteService.getById(idArtiste);
+		artiste.addAlbum(album);
+		artisteService.save(artiste);
+		persistenceManager.commitTransaction();
+		persistenceManager.closeSession();
+		
+		String redirectUrl = "/albums.do?artiste="+idArtiste;
+	    return "redirect:" + redirectUrl;
+		
+	}
+
+	
 }

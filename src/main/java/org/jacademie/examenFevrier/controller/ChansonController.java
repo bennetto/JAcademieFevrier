@@ -2,6 +2,8 @@ package org.jacademie.examenFevrier.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.jacademie.examenFevrier.bo.Album;
 import org.jacademie.examenFevrier.bo.Artiste;
@@ -39,7 +41,9 @@ public class ChansonController {
 	@ModelAttribute("chansons") 
 	public List<Chanson> getChansonsList(){
 		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
 		List<Chanson> albums = chansonService.getAll();
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return albums;
 	}
@@ -53,7 +57,9 @@ public class ChansonController {
 	
 	public Album getAlbum(int idAlbum){
 		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
 		Album album = albumService.getById(idAlbum);
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return album;
 	}
@@ -83,12 +89,47 @@ public class ChansonController {
 		
 	}
 	
-/*
-	@RequestMapping(value="/create-chanson", method= RequestMethod.POST)
-	public ModelAndView createChanson(@ModelAttribute(value="album") Chanson album, @ModelAttribute(value="albums") List<Chanson> albums){
-		//albumService.save(album);
-		return new ModelAndView("list-album", "albums",albums);
+	@RequestMapping(value="/delete_chanson", method= RequestMethod.GET)
+	public String deleteArtiste(@RequestParam("chanson") int idChanson,@RequestParam("album") int idAlbum ,HttpServletRequest request){
+
+
+		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
+		Chanson chanson = chansonService.getById(idChanson);
+		chansonService.delete(chanson);
+		persistenceManager.commitTransaction();
+		persistenceManager.closeSession();
 		
+		String redirectUrl = "/chansons.do?album="+idAlbum;
+	    return "redirect:" + redirectUrl;
 		
-	}*/
+	}
+
+	@RequestMapping(value="/addChanson", method= RequestMethod.POST)
+	public String createArtiste(@ModelAttribute(value="chanson") Chanson chanson,@RequestParam("album") int idAlbum){
+		
+		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
+		
+		logger.info(idAlbum);
+		Album album = albumService.getById(idAlbum);
+		logger.info(album);
+		album.addChanson(chanson);
+		 
+		try {
+			albumService.save(album);
+			persistenceManager.commitTransaction();
+			persistenceManager.closeSession();
+			
+		} catch (Exception e) {
+			logger.error(e);
+			persistenceManager.rollbackTransaction();
+			persistenceManager.closeSession();
+		}
+	
+		
+		String redirectUrl = "/chansons.do?album="+idAlbum;
+	    return "redirect:" + redirectUrl;
+		
+	}
 }
