@@ -31,4 +31,13 @@
 		WHERE  alb.codeAlbum=:album_code 
 		AND ch.numero=:chanson_numero
 	</query>
+	
+	<query name="getChansonByAlbum">
+		SELECT ch FROM Album as alb
+		JOIN alb.chansons as ch
+		WHERE  alb.codeAlbum=:album_code 
+	</query>
+	
+	
+	
 </hibernate-mapping>	

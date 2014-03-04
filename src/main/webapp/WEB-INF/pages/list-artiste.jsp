@@ -10,7 +10,7 @@
 <c:if test="${not empty artistes}">
 	<ul>
 		<c:forEach var="artiste" items="${artistes}">
-			<a href="/artiste.do/${artiste.codeArtiste}/" value="${artiste.codeArtiste}"><li>${artiste.nom}</li></a>
+			<a href="albums.do?artiste=${artiste.codeArtiste}" value="${artiste.codeArtiste}"><li>${artiste.nom}</li></a>
 		</c:forEach>
 	</ul>
 </c:if>

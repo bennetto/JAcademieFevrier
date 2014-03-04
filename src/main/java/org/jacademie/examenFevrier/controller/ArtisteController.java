@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.jacademie.examenFevrier.bo.Artiste;
 import org.jacademie.examenFevrier.services.ArtisteService;
+import org.jacademie.examenFevrier.utils.HibernateManager;
+import org.jacademie.examenFevrier.utils.PersistenceManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,20 +21,30 @@ public class ArtisteController {
 	@Autowired
 	ArtisteService artisteService;
 	
+	
+	
+	private PersistenceManager persistenceManager = new HibernateManager();
 
 	
-	@ModelAttribute("artistes")
+	@ModelAttribute("artistes") 
 	public List<Artiste> getArtistesList(){
-		return artisteService.getAll();
+		persistenceManager.openSession();
+		List<Artiste> artistes = artisteService.getAll();
+		persistenceManager.closeSession();
+		return artistes;
 	}
+	
 	@ModelAttribute(value="artiste")
 	public Artiste getArtiste(){
 		return new Artiste();
 	}
-
+	
 	@RequestMapping(value="/artistes", method= RequestMethod.GET)
 	public ModelAndView listArtiste(@ModelAttribute(value="artistes") List<Artiste> artistes){
-		return new ModelAndView("list-artiste", "artistes",artistes);
+
+		ModelAndView modelAndView = new ModelAndView("list-artiste", "artistes",artistes);
+		
+		return modelAndView; 
 		
 	}
 	

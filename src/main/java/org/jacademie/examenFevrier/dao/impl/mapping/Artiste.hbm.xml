@@ -20,5 +20,20 @@
 		</set>
 
 	</class>
+	<query name="getAlbumByIDArtiste">
+		SELECT alb FROM Artiste as art
+		JOIN art.albums as alb
+		WHERE  art.codeArtiste=:artiste_code 
+	</query>
+	
+	<query name="getArtisteByIDAlbum">
+		SELECT art FROM Artiste as art
+		JOIN art.albums as alb
+		WHERE  alb.codeAlbum=:album_code 
+	</query>
+	
+	
+	
+
 	
 </hibernate-mapping>	

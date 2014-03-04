@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 public class ChansonHibernateDAO extends GeneriqueHibernateDAO<Chanson> implements
 		ChansonDAO {
 
+
+	
 	public ChansonHibernateDAO() {
 		super(Chanson.class);
 	}
@@ -39,6 +41,17 @@ public class ChansonHibernateDAO extends GeneriqueHibernateDAO<Chanson> implemen
     	}
     	return null;
 		
+	}
+
+	@Override
+	public List<Chanson> getByAlbum(int albumId) {
+		Session hibernateSession = getSession();
+		hibernateSession.beginTransaction();
+    	Query hqlQuery = hibernateSession.getNamedQuery("getChansonByAlbum");
+    	hqlQuery.setInteger("album_code", albumId);
+    	List<Chanson> chansons = hqlQuery.list();
+    	hibernateSession.close();
+    	return chansons;
 	}
 
 }

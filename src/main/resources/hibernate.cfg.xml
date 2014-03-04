@@ -20,7 +20,7 @@
  			
 		<!-- Configuration hibernate -->
        	<property name="show_sql">true</property>
-       	<property name="hibernate.hbm2ddl.auto">create</property>
+       	<property name="hibernate.hbm2ddl.auto">update</property>
        	
 						
 		<!-- Liste des fichiers de Mapping hbm -->

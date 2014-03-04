@@ -21,4 +21,10 @@
 
 	</class>
 
+	<query name="getAlbumByIDChanson">
+		SELECT alb FROM Album as alb
+		JOIN alb.chansons as ch
+		WHERE  ch.idChanson=:idChanson 
+	</query>
+	
 </hibernate-mapping>	

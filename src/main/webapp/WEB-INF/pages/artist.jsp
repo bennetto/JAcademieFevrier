@@ -6,12 +6,12 @@
 <title>${artiste.nom} : </title>
 </head>
 <body>
-<a href="/listartist.do/">liste des artistes</a>
+<a href="artistes.do">liste des artistes</a>
 <h1>${artiste.nom}:</h1>
 <c:if test="${not empty albums}">
 	<ul>
 		<c:forEach var="album" items="${albums}">
-			<a href="/album.do/${album.codeAlbum}/" value="${album.nom}"><li>${album.nom}</li></a>
+			<a href="chansons.do?album=${album.codeAlbum}" value="${album.nom}"><li>${album.nom}</li></a>
 		</c:forEach>
 	</ul>
 </c:if>

@@ -52,4 +52,9 @@ public class ArtisteServiceImpl implements ArtisteService{
 
 	}
 
+	@Override
+	public Artiste getArtisteByIDAlbum(int idAlbum) {
+		return artisteDAO.getArtisteByIDAlbum(idAlbum);
+	}
+
 }

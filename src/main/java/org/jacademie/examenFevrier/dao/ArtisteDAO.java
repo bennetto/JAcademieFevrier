@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtisteDAO extends GeneriqueDAO<Artiste>{
-
+	Artiste getArtisteByIDAlbum(int idAlbum);
+	
 
 }

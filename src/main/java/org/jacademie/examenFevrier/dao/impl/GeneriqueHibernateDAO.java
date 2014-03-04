@@ -7,15 +7,21 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.jacademie.examenFevrier.dao.GeneriqueDAO;
 import org.jacademie.examenFevrier.utils.HibernateManager;
+import org.jacademie.examenFevrier.utils.PersistenceManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 abstract public class GeneriqueHibernateDAO<T extends Object> implements GeneriqueDAO<T>{
 
 	protected Class<T> clazz;
 	protected Logger logger = Logger.getLogger(GeneriqueHibernateDAO.class);
-	protected HibernateManager manager = new HibernateManager();
+	
+	
+	private PersistenceManager persistenceManager = new HibernateManager();
+	
 	public GeneriqueHibernateDAO(Class<T> clazz) {
 		this.clazz = clazz; 
 	}
@@ -24,8 +30,8 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 	abstract public java.util.List<T> searchByName(String searchPattern);
 	abstract public T getOneByName(String searchPattern);
 	
-	protected Session getSession(){
-		return manager.getSession();
+	protected  Session getSession(){
+		return persistenceManager.getSession();
 	}
 
 	protected List<T> searchByPattern(String table, String searchPattern){
@@ -45,14 +51,18 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 	@Override
 	public T getById(Serializable id) {
 		Session hibernateSession = getSession();
+		hibernateSession.beginTransaction();
 		T t = null;
 		try{
 			t = (T) hibernateSession.get(clazz, id);
+			 hibernateSession.close();
 			return t;
 		}catch(RuntimeException ex){
+			 hibernateSession.close();
 			logger.error("GenericHibernateDAO<"+clazz.getSimpleName()+">.getById unexpected error.", ex );//,ex
 			throw ex;
 		}
+		
 		
 	}
 
@@ -63,8 +73,9 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 		hibernateSession.beginTransaction();
 		List<T> list = null;
         Query query = hibernateSession.createQuery("from " + clazz.getName());
-        hibernateSession.close();
         list = query.list();
+        hibernateSession.close();
+       
         return list;
 	}
 	
