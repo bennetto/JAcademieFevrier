@@ -3,8 +3,8 @@ Examen Fevrier
 
 Auteurs
 -------
-Benjamin BONNETTO
-Jean-Michel POTHELUNE
+* Benjamin BONNETTO
+* Jean-Michel POTHELUNE
 
 Sujet
 ------
@@ -72,6 +72,14 @@ Une fois le gestionnaire lancé, entrez les paramètres suivant pour vous connec
 * User:  SA
 * Password: (laisser vide)
  
+### Lancement de l'application sous glassfish
+Commencez par installer votre serveur glassfish 3.1, et integrez le dans eclipse. (http://blog.paumard.org/tutoriaux/eclipse-glassfish-ejb/)
+Dans la vue Server (Window > show view > Servers), clic droit sur votre serveur Glassfish > Add and Remove... 
+
+Ajoutez le projet JAcademieFevrier et appuyez sur Finish.
+
+clic droit sur votre serveur Glassfish > Start... 
+
 ### Initialisation de la base de données. (Nouvelle BDD)
 Dans src/main/resources, ouvrez le fichier confCSV.properties avec un éditeur de texte.
 dans inputPath, renseignez le chemin du dossier où se situent les fichiers de mise à jour
@@ -87,14 +95,6 @@ Si vous utilisez une base de donnée HSQLDB, vous n'avez qu'a personnaliser les 
 Si vous utilisez un autre type de base de données, changez le dialecte, et importez votre propre librairie dans le pom.xml (utilisateur avancés)
 
 
-
-### Lancement de l'application
-Placez vous dans la classe Main.java, et appuyer sur le bouton Run (Fleche verte).
-
-
-
-
-TODO : Comment lancer le server et l'application
 
 
 
@@ -115,7 +115,10 @@ Cette librairie permet de lire des fichiers csv.
 Ce framework permet de réaliser des test unitaire sur le projet. Il permet de tester de façon automatique des fonctions de classes importantes afin de vérifier après modification que tous marche correctement
 
 ### spring MVC
-TODO ; spring MVC
+Spring est un conteneur léger permetant la gestion de dépendance. Il s'occupe du cycle de vie des différents objets dont il a la charge et injecte les éventuelles dépendences. Ces librairies web et mvc permettent la gestion de ces objets lors du requêtage web, en apportant un support aux services javaEE web. 
+
+### glassfish
+Glassfish est un serveur d'application web capable d'intégrer des projets javaEE web. Il représente l'environnement dans lequel évoluera notre application web.
 
 
 Structure du projet
@@ -124,8 +127,7 @@ Structure du projet
 * **Couche service** : Cette couche renferme l'intelligence du projet. C'est dans cette couche que vous pouvez trouvez les fonctions qui permette de manipuler les objets.
 * **Couche d’accès au donnée** (DAO) : Cette couche contient toutes les fonctions pour communiquer avec le base de donnée ( dans ce projet via hibernate). 
 * **Couche métier** (BO) : Cette couche contient les classes qui permettes de stocker les donnée métier.  Ce ne sont que des données brutes, et il n'y a aucune (ou très peu) d'intelligence.
-
-TODO : add couche controller et page
+* **Couche controlleur** : Cette couche contient les classes en charge de la redirection et du traitement de réponses aux requetes html.
 
 
 ### Main
@@ -134,9 +136,8 @@ Un dernier service permettera le déplacement du fichier traité dans un dossier
 
 ### Dépendance dans la projet
  Dans le projet toutes les classes ( en dehors des classes métiers) sont interfacées. Cela permet de limiter les dépendance entre les classes et permet de changer de technologie aisément (Par exemple si une nouvelle implémentation d'un service souhaite être faite, il suffira d’implémenter la bonne interface et de ne faire que quelques changement dans les classes qui les utilises. ).
-
-Même s'il n'en implémente pas dans l'état actuel, le projet est prêt pour l'intégration d'un framework d'injection de dépendance (spring). ceci permettrait de rendre les classes encore plus indépendant. 
-
+ 
+Spring gère la gestion du cycle de vie des differents services, DAOs et objets mis en oeuvre lors d'une requete
 
 
 Modèle physique des données
@@ -162,54 +163,64 @@ Modèle physique des données
 Descriptif des packages
 -----------------------
 
-TODO : add package controller
 
 
-### org.jacademie.examenDecembre.bo (Buiseness object)
+### org.jacademie.examenFevrier.bo (Buiseness object)
 Contient les classes métiers.
 
-### org.jacademie.examenDecembre.dao
+### org.jacademie.examenFevrier.dao
 Contient les interfaces des Data Access Objects
 
-### org.jacademie.examenDecembre.dao.impl
+### org.jacademie.examenFevrier.dao.impl
 Implementation des DAO (Hibernate)
 
-### org.jacademie.examenDecembre.dao.impl.mapping
+### org.jacademie.examenFevrier.dao.impl.mapping
 Fichiers de mapping Objets métiers - DB (Hibernate)
 
-### org.jacademie.examenDecembre.services
+### org.jacademie.examenFevrier.services
 Contient les interfaces des differents services:
+* **MusicDataProcessService :** Permet l'execution du processus d'extraction d'information d'un fichier csv et la mise a jour de la base de donnée en conséquence.
 * __FileMoverService :__  Permet le déplacement d'un fichier.
 * **MusicDataExtractorService :** Permet l'extraction d'informations (MusicData) sur les musiques a partir d'un lecteur (Reader).
 * **MusicDataUpdaterService :** Permet la mise a jour des objets métiers à partir d'informations (MusicData) extraites ou fournies.
 * **MusicData :** Permet le stockage temporaire d'informations sur les musiques.
 * **MusicDataException :** Soulevée par MusicDataExtractorService et MusicDataUpdaterService lorsque les informations lues ou enregistrées sont éronnées.
+* Les autres services permettent la gestion directe des différents types d'objets.
 
-### org.jacademie.examenDecembre.services.impl
+### org.jacademie.examenFevrier.services.impl
 Implementation des services:
 
-### org.jacademie.examenDecembre.utils
+### org.jacademie.examenFevrier.utils
 Rassemble diférents outils utilisée par les services.
 * **PersistenceManager :** Interface les outils traditionnels de gestion de base SQL.
 * **HibernateManage :** Implémentation de l'interface PersitenceManager pour hibernate.
 
-### org.jacademie.examenDecembre.tests
+### org.jacademie.examenFevrier.tests
 Classes de test des Services et DAO de l'application.
 * **DAOsTest :** Test la bonne sauvegarde et récupération de tous les objets.
 * **MusicDataUpdaterService :** Test unitaire (rudimentaire) de la classe MusicDataUpdater
 
+### org.jacademie.examenFevrier.controller
+Contient les controleurs qui s'occuperont de diriger et de répondre aux requetes HTML.
 
 ### Ressources:
 * **confCSV.properties :** Configuration de la position des .music et des dossiers de déplacement pour la réussite ou l’échec de la lecture de ces fichiers.
 * **hibernate.cfg.xml :** Configuration de la base de données et du mapping Hibernate
 * **log4j.properties :** Configuration de la journalisation.
 
-TODO : ressource spring et ...
+### webapp/WEB-INF
+* **web.xml** Configuration du contexte du serveur web
+* **aplicationContext.xml** Configuration du contexte Spring
+* **mvc-dispatcher-servlet.xml** Configuration de la jonction web et spring
 
+### webapp/WEB-INF/pages
+Contient les diferents templates jsp du projet
+* **list-artiste.jsp :** Template pour l'affichage de la liste des artistes enregistrés
+* **artiste.jsp :** Description d'un artiste et édition de ses albums
+* **album.jsp :* Description d'un album et édition des ses chansons
 Librairies utilisées
 --------------------
 
-TODO 
 
 * **log4j :** Pour la journalisation.
 * **org.hsqldb :** Gestion de base de données.
@@ -217,3 +228,5 @@ TODO
 * **net.sf.opencsv :** Lecteur et parseur de fichiers CSV.
 * **junit (4.11) :** Gestion des tests unitaires.
 * **commons-io :** Permet de gérer aisément les flux de donnée, comme la gestion de fichier.
+* **spring-core** et **spring-context :** Conteneur léger permetant l'injection de dépendances
+* **spring-web** et **spring-webmvc :** Librairie pour l'utilisation de spring au sein d'un serveur web.
