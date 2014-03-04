@@ -32,12 +32,12 @@ public class ArtisteHibernateDAO extends GeneriqueHibernateDAO<Artiste> implemen
 	@Override
 	public Artiste getArtisteByIDAlbum(int idAlbum) {
 		Session hibernateSession = getSession();
-		hibernateSession.beginTransaction();
+		
     	Query hqlQuery = hibernateSession.getNamedQuery("getArtisteByIDAlbum");
     	hqlQuery.setInteger("album_code", idAlbum);
     	List<Artiste> artistes = hqlQuery.list();
     	
-    	hibernateSession.close();
+    	
     	if(artistes.size() == 1){
     		return artistes.get(0);
     	}

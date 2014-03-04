@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ChansonController {
@@ -50,7 +49,9 @@ public class ChansonController {
 	
 	public List<Chanson> getChansonsList(int idAlbum){
 		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
 		List<Chanson> chansons = chansonService.getByAlbum(idAlbum);
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return chansons;
 	}
@@ -66,7 +67,9 @@ public class ChansonController {
 	
 	public Artiste getArtiste(int idAlbum){
 		persistenceManager.openSession();
+		persistenceManager.beginTransaction();
 		Artiste artiste = artisteService.getArtisteByIDAlbum(idAlbum);
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return artiste;
 	}

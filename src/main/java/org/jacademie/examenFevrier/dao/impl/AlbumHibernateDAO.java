@@ -51,12 +51,11 @@ public class AlbumHibernateDAO extends GeneriqueHibernateDAO<Album> implements A
 	public List<Album> getByArtistId(int id) {
 		
 		Session hibernateSession = getSession();
-		hibernateSession.beginTransaction();
+		
     	Query hqlQuery = hibernateSession.getNamedQuery("getAlbumByIDArtiste");
     	hqlQuery.setInteger("artiste_code", id);
     	List<Album> albums = hqlQuery.list();
     	
-    	hibernateSession.close();
     	return albums;
     	
 	}

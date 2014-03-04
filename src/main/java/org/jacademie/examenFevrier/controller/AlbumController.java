@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AlbumController {
@@ -45,8 +44,9 @@ public class AlbumController {
 	
 	public List<Album> getAlbumsList(int idArtiste){
 		persistenceManager.openSession();
-		
+		persistenceManager.beginTransaction();
 		List<Album> albums = albumService.getByArtistId(idArtiste);
+		persistenceManager.commitTransaction();
 		persistenceManager.closeSession();
 		return albums;
 	}

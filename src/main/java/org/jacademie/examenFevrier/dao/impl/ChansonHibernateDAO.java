@@ -46,11 +46,12 @@ public class ChansonHibernateDAO extends GeneriqueHibernateDAO<Chanson> implemen
 	@Override
 	public List<Chanson> getByAlbum(int albumId) {
 		Session hibernateSession = getSession();
-		hibernateSession.beginTransaction();
+
+
     	Query hqlQuery = hibernateSession.getNamedQuery("getChansonByAlbum");
     	hqlQuery.setInteger("album_code", albumId);
     	List<Chanson> chansons = hqlQuery.list();
-    	hibernateSession.close();
+    	
     	return chansons;
 	}
 
