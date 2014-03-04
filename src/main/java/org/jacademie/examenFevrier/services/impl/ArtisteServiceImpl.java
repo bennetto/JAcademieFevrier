@@ -40,6 +40,7 @@ public class ArtisteServiceImpl implements ArtisteService{
 		artisteDAO.save(entity);
 	}
 
+
 	@Override
 	public void update(Artiste entity) {
 		artisteDAO.update(entity);

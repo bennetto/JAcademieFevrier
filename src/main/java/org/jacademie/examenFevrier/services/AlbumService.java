@@ -16,6 +16,8 @@ public interface AlbumService {
 	
 	
 	void save(Album entity);
+	
+	
 	void update(Album entity);
 	void delete(Album entity);
 }

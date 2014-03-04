@@ -40,6 +40,7 @@ public class AlbumServiceImpl implements AlbumService{
 	public void save(Album entity) {
 		albumDAO.save(entity);
 	}
+	
 
 	@Override
 	public void update(Album entity) {

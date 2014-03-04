@@ -24,8 +24,8 @@
 <table style="border:0px">
  <thead> <!-- En-tête du tableau -->
        <tr>
-           <th>Code Album</th>
-           <th>Nom Album</th>
+          <th>Code Artiste</th>
+           <th>Nom Artiste</th>
        </tr>
    </thead>
    <tbody> <!-- Corps du tableau -->

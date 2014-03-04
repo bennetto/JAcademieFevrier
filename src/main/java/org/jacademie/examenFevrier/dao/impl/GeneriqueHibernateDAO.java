@@ -84,7 +84,10 @@ abstract public class GeneriqueHibernateDAO<T extends Object> implements Generiq
 	public void save(T entity) {
 		Session hibernateSession = getSession();
 		hibernateSession.saveOrUpdate(entity);
+		
 	}
+	
+	
 
 	@Override
 	public void update(T entity) {

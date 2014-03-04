@@ -23,7 +23,7 @@ public class MusicDataController {
 		musicDataProcessService.updateMusicFromFiles();
 		logger.info("Stop updateMusicFromFiles ");
 
-		return "hello";
+		return "musicExtractor";
 		
 	}
 	

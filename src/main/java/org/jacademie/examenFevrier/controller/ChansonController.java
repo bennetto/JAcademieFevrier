@@ -117,6 +117,7 @@ public class ChansonController {
 		album.addChanson(chanson);
 		 
 		try {
+		
 			albumService.save(album);
 			persistenceManager.commitTransaction();
 			persistenceManager.closeSession();

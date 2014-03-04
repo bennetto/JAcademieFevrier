@@ -29,15 +29,12 @@
            <th>Numero</th>
            <th>titre</th>
            <th>duree</th>
-		<th>idChanson</th>
-           
        </tr>
    </thead>
    <tbody> <!-- Corps du tableau -->
    <tr>
    	<td><form:input class="form-control" path="numero" id="numero" type="number"/></td>
 	<td><form:input class="form-control" path="titre" id="titre" /></td>
-	<td><form:input class="form-control" path="idChanson" id="idchanson" type="number"/></td>
 	<td><form:input class="form-control" path="duree" id="duree" type="number"/></td>
 	<td><button type="submit" class="btn btn-primary">Ajouter</button></td>
    </tr>

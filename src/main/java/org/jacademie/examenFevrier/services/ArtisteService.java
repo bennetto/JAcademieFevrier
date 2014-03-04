@@ -13,6 +13,7 @@ public interface ArtisteService {
 	Artiste getArtisteByIDAlbum(int idAlbum);
 	
 	void save(Artiste entity);
+
 	void update(Artiste entity);
 	void delete(Artiste entity);
 }

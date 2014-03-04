@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.jacademie.examenFevrier.bo.Album;
+import org.jacademie.examenFevrier.bo.Artiste;
 import org.jacademie.examenFevrier.bo.Chanson;
 import org.jacademie.examenFevrier.dao.ChansonDAO;
 import org.jacademie.examenFevrier.services.ChansonService;
@@ -40,7 +41,7 @@ public class ChansonServiceImpl implements ChansonService{
 	public void save(Chanson entity) {
 		chansonDAO.save(entity);
 	}
-
+	
 	@Override
 	public void update(Chanson entity) {
 		chansonDAO.update(entity);

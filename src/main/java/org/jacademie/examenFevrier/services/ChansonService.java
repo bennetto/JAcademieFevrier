@@ -14,6 +14,7 @@ public interface ChansonService {
 	public List<Chanson> getByAlbum (int albumId);
 	
 	void save(Chanson entity);
+	
 	void update(Chanson entity);
 	void delete(Chanson entity);
 }

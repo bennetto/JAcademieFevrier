@@ -22,18 +22,6 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	
-	<!-- Internationalization -->
-	<bean id="messageSource"
-	class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-	<property name="basename" value="classpath:messages"></property>
-	</bean>
-	
-	<bean id="localeResolver"
-	class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver">
-	
-	</bean>
-	
-	
+		
 
 </beans>
