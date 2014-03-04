@@ -101,22 +101,26 @@ Navigation
 * Lancement de la mise a jour a partir des fichiers CSV (Examen précedent)
 
 http://localhost:8080/JAcademieFevrier/musicExtractor.do
+
 Lance l'execution du script mis en place lors de l'examen précedent
 
 * Affichage de la liste des artistes.
 
 http://localhost:8080/JAcademieFevrier/artistes.do
+
 Affichage de la liste des artistes contenus dans la base de données. Le bouton delete permet la suppression de l'artiste associé. Le formulaire en bas de page permet la création d'un nouvel artiste.
 
 ### Pages de navigation :
 * Affichage de la liste des albums d'un artistes.
 
 http://localhost:8080/JAcademieFevrier/albums.do?artiste=(code_artiste)
+
 Affichage de la liste des albums d'un artiste. Le bouton delete permet la suppression de l'album associé. Le formulaire en bas de page permet l'ajout d'un nouvel album pour cet artiste.
 
 * Affichage de la liste des albums d'un artistes.
 
 http://localhost:8080/JAcademieFevrier/chansons.do?album=(code_album)
+
 Affichage de la liste des chansons d'un album. Le bouton delete permet la suppression de la chanson associée. Le formulaire en bas de page permet l'ajout d'une nouvelle chanson pour cet album.
 
 
@@ -162,7 +166,6 @@ Spring gère la gestion du cycle de vie des differents services, DAOs et objets 
 
 Modèle physique des données
 ------------------------------------
-![Modele donnes](/doc/modele.jpg "Modèle physique des données")
 ### Artiste:   
 * **CODEARTISTE** integer, clef primaire : identifiant unique pour chaque artiste.
 * **NOM** varchar(50) : nom de l'artiste.
